@@ -8,4 +8,4 @@
 
 ## Results
 
-## Lience
+## License
