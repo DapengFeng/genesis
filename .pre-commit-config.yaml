@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.4.0
+  rev: v5.0.0
   hooks:
   - id: check-ast
   - id: check-docstring-first
@@ -27,9 +27,10 @@ repos:
     types_or: [c, c++, cuda]
     args: [-i, --sort-includes, ]
   - id: cppcheck
+    args: [--inline-suppr]
   - id: cpplint
 - repo: https://github.com/BlankSpruce/gersemi
-  rev: 0.9.2
+  rev: 0.17.1
   hooks:
   - id: gersemi
 - repo: https://github.com/hadolint/hadolint
@@ -43,7 +44,7 @@ repos:
   - id: ruff
     args: ['--fix', '--exit-non-zero-on-fix']
 - repo: https://github.com/psf/black
-  rev: 23.7.0
+  rev: 24.10.0
   hooks:
   - id: black
     args: ['--line-length=79']
@@ -65,3 +66,14 @@ repos:
     args: ['--curly', '--numeric', '--align=13', '--sort=-year,author',
            '--duplicates=key', '--no-escape', '--sort-fields', '--modify',
            '--remove-empty-fields', '--no-remove-dupe-fields', '--wrap=80']
+-   repo: https://github.com/doublify/pre-commit-rust
+    rev: master
+    hooks:
+    - id: fmt
+    - id: cargo-check
+    - id: cargo-clippy
+- repo: https://github.com/compilerla/conventional-pre-commit
+  rev: v3.6.0
+  hooks:
+    - id: conventional-pre-commit
+      stages: [commit-msg]
