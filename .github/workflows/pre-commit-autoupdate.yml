@@ -1,0 +1,39 @@
+name: pre-commit autoupdate
+
+on:
+  schedule:
+    - cron: '0 0 1 1,4,7,10 *' # runs quarterly
+  workflow_dispatch:
+
+jobs:
+  autoupdate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install pre-commit
+        run: pip install pre-commit
+      - name: Run pre-commit autoupdate
+        run: pre-commit autoupdate
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .pre-commit-config.yaml
+          git commit -m "chore(pre-commit): autoupdate hooks" || echo "No changes to commit"
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: autoupdate/pre-commit
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: autoupdate/pre-commit
+          title: 'chore(pre-commit): autoupdate hooks'
+          commit-message: 'chore(pre-commit): autoupdate hooks'
+          body: |
+            This PR was created automatically by a workflow to update pre-commit hooks.
