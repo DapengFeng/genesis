@@ -27,7 +27,7 @@ jobs:
       - name: Push changes
         uses: ad-m/github-push-action@v0.8.0
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PRE_COMMIT_PAT }}
           branch: autoupdate/pre-commit
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
