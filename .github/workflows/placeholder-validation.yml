@@ -3,7 +3,7 @@ name: validate issue and PR placeholders
 on:
   issues:
     types: [opened, edited, reopened]
-  pull_request_target:
+  pull_request:
     types: [opened, edited, reopened, ready_for_review]
 
 permissions:
@@ -27,6 +27,8 @@ jobs:
           with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as file:
               event = json.load(file)
 
+          # Repository templates use token-style placeholders such as
+          # {{TEST_RESULTS}} and {{AGENT_NOTES}}.
           placeholder_pattern = re.compile(r"\{\{[A-Za-z0-9_-]+\}\}")
           fields_to_check = []
 
