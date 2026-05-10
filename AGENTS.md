@@ -10,7 +10,8 @@ reviewers need.
 
 1. Start from the matching issue form and keep every section heading intact.
 2. Replace every `{{PLACEHOLDER}}` with repository-specific content before
-   submitting an issue or pull request.
+   submitting an issue or pull request. Automation rejects issues and pull
+   requests that still contain unresolved template tokens.
 3. Prefer short bullet lists, numbered steps, and fenced code blocks over
    open-ended prose.
 4. Run `pre-commit run --all-files` before requesting review.
@@ -63,3 +64,5 @@ Always provide:
 - Avoid ambiguous phrases such as "it is broken" without reproduction details.
 - Record constraints, acceptance criteria, and review notes in the dedicated
   `Agent-Specific Notes` sections.
+- Mirror the filled-in bug report and pull request examples in `README.md`
+  when drafting new submissions.

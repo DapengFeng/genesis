@@ -39,8 +39,8 @@ jobs:
           commit-message: 'chore(pre-commit): autoupdate hooks'
           body: |
             This PR was created automatically by a workflow to update pre-commit hooks.
-            
+
             ## Changes
             - Updated pre-commit hook versions to their latest releases
-            
+
             Please review the changes and merge if everything looks good.
