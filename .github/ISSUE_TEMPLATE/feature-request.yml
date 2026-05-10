@@ -1,29 +1,78 @@
-name: 🚀 Feature request
-description: Submit a proposal/request for a new feature
+name: Feature request
+description: Propose a change with explicit scope, acceptance criteria, and agent notes
+title: "[Feature]: "
+labels:
+  - enhancement
 
 body:
 - type: markdown
   attributes:
-    value: >
-      #### Note: Please write your feature request in English to ensure it can be understood and addressed by the development team.
+    value: |
+      <!-- AGENT_ONLY: Prefer short, structured statements over free-form paragraphs. -->
+      <!-- AGENT_ONLY: Replace every {{PLACEHOLDER}} before submitting the request. -->
+      Describe the desired outcome clearly so both human reviewers and coding agents can act on it.
 - type: textarea
+  id: context
   attributes:
-    label: 🚀 The feature, motivation and pitch
-    description: >
-      A clear and concise description of the feature proposal. Please outline the motivation for the proposal. Is your feature request related to a specific problem? e.g., *"I'm working on X and would like Y to be possible"*. If this is related to another GitHub issue, please link here too.
+    label: Context / Background
+    description: Explain the current workflow, the project context, and why this request matters now.
+    placeholder: |
+      {{CONTEXT}}
   validations:
     required: true
 - type: textarea
+  id: problem_statement
   attributes:
-    label: Alternatives
-    description: >
-      A description of any alternative solutions or features you've considered, if any.
+    label: Problem Statement
+    description: Describe the concrete limitation, gap, or pain point that should be solved.
+    placeholder: |
+      {{PROBLEM_STATEMENT}}
+  validations:
+    required: true
 - type: textarea
+  id: proposed_change
+  attributes:
+    label: Proposed Change
+    description: Describe the preferred solution, including important constraints or implementation boundaries.
+    placeholder: |
+      {{PROPOSED_CHANGE}}
+  validations:
+    required: true
+- type: textarea
+  id: acceptance_criteria
+  attributes:
+    label: Acceptance Criteria
+    description: List the observable conditions that must be true for this request to be complete.
+    placeholder: |
+      - [ ] {{ACCEPTANCE_CRITERION_1}}
+      - [ ] {{ACCEPTANCE_CRITERION_2}}
+  validations:
+    required: true
+- type: textarea
+  id: alternatives
+  attributes:
+    label: Alternatives Considered
+    description: Note any alternative solutions, workarounds, or reasons for rejecting other options.
+    placeholder: |
+      {{ALTERNATIVES}}
+- type: textarea
+  id: additional_context
   attributes:
     label: Additional context
-    description: >
-      Add any other context or screenshots about the feature request.
+    description: Add supporting examples, links, screenshots, or logs if they clarify the request.
+    placeholder: |
+      {{ADDITIONAL_CONTEXT}}
+- type: textarea
+  id: agent_notes
+  attributes:
+    label: Agent-Specific Notes
+    description: Record instructions that a coding agent should follow while implementing this request.
+    placeholder: |
+      {{AGENT_NOTES}}
+      Example:
+      - Keep markdown sections stable for machine parsing
+      - Include test evidence or explain why tests were not added
 - type: markdown
   attributes:
-    value: >
-      Thanks for contributing 🎉!
+    value: |
+      Thanks for contributing.
