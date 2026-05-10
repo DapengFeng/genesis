@@ -28,4 +28,16 @@ This template provides a ready-to-use foundation for C++ development projects wi
 3. Install pre-commit hooks: `pre-commit install -t commit-msg`
 4. Start developing your C++ project
 
+## Coding Agent Support
+
+This repository includes structured issue and pull request templates that are
+designed to work well for both humans and coding agents.
+
+- Follow `AGENTS.md` for repository-specific workflow and template usage
+  guidance.
+- Follow `.github/copilot-instructions.md` for GitHub Copilot-specific
+  instructions.
+- Run `pre-commit run --all-files` before opening a pull request and include
+  the command output in the PR template.
+
 This template helps maintain code quality and consistency across your C++ projects while providing a solid foundation for collaborative development.

@@ -1,15 +1,45 @@
-# What does this PR do?
+<!-- AGENT_ONLY: Replace every {{PLACEHOLDER}} before requesting review. -->
+<!-- AGENT_ONLY: Keep commands, logs, and reviewer notes in fenced blocks or bullet lists. -->
 
-<!--
-Congratulations! You've made it this far! You're not quite done yet though.
+## Summary of Changes
 
-Once merged, your PR is going to appear in the release notes with the title you set, so make sure it's a great title that fully reflects the extent of your awesome contribution.
+- {{SUMMARY_OF_CHANGES}}
 
-Then, please replace this with a description of the change and which issue is fixed (if applicable). Please also include relevant motivation and context. List any dependencies (if any) that are required for this change.
+## Related Issue
 
-Once you're done, someone will review your PR shortly (see the section "Who can review?" below to tag some potential reviewers). They may suggest changes to make the code even better. If no one reviewed your PR after a week has passed, don't hesitate to post a new comment @-mentioning the same persons---sometimes notifications get lost.
--->
+- Closes {{ISSUE_REFERENCE}}
 
-<!-- Remove if not applicable -->
+## Testing Evidence
 
-Fixes # (issue) or description of the problem this PR solves.
+### Commands
+
+```bash
+{{TEST_COMMANDS}}
+```
+
+### Results
+
+```text
+{{TEST_RESULTS}}
+```
+
+## Screenshots or Logs
+
+```text
+{{SCREENSHOTS_OR_LOGS}}
+```
+
+## Breaking Changes
+
+- [ ] No breaking changes
+- [ ] Breaking changes described below
+
+{{BREAKING_CHANGES}}
+
+## Human Review Checklist
+
+- [ ] The changes are limited to the stated problem
+- [ ] The issue, motivation, and acceptance criteria are reflected in this PR
+- [ ] Tests or manual verification steps are included
+- [ ] Documentation and templates were updated where needed
+- [ ] Risks, trade-offs, and follow-up work are documented when applicable
