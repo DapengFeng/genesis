@@ -29,7 +29,7 @@ jobs:
 
           # Repository templates use token-style placeholders such as
           # {{TEST_RESULTS}} and {{AGENT_NOTES}}.
-          placeholder_pattern = re.compile(r"\{\{[A-Za-z0-9_-]+\}\}")
+          placeholder_pattern = re.compile(r"\{\{[A-Za-z0-9_]+\}\}")
           fields_to_check = []
 
           issue = event.get("issue")
