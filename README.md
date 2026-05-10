@@ -16,7 +16,7 @@ development workflow across multiple languages and toolchains.
 The template is designed to support a mix of languages and project types.
 Current hooks and configuration cover:
 
-- C and C++ formatting and linting
+- C/C++ formatting and linting
 - Python formatting and linting
 - Rust formatting and static checks
 - Dockerfile linting
@@ -69,6 +69,8 @@ project:
 - Replace generic descriptions with project-specific documentation
 - Add or remove toolchains in `.pre-commit-config.yaml`
 - Extend `.gitignore` for your build outputs and editor settings
+- Update or remove `AGENTS.md` and `.github/copilot-instructions.md` if your
+  project does not use coding-agent workflows
 - Add build, test, and release workflows that match your stack
 
 This template gives new repositories a clean starting point for contributor
