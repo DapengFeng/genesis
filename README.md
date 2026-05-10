@@ -51,7 +51,7 @@ Use the existing repository automation before opening a pull request:
 - Run `pre-commit run --all-files`
 - Use conventional commit messages
 - Keep issue reports and pull requests aligned with the provided templates
-- Replace every `{{PLACEHOLDER}}` before submitting an issue or pull request;
+- Replace every `{{PLACEHOLDER}}` before submitting an issue or pull request.
   GitHub Actions validates this automatically on new and edited submissions
 
 ## Coding agent support
