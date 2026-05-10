@@ -101,12 +101,14 @@ easy to miss during review.
 
 ## Screenshots / Logs
 
-    PR body excerpt:
-    - Related: #12
+~~~md
+PR body excerpt:
+- Related: #12
 
-    ### Results
+### Results
 
-    {{TEST_RESULTS}}
+{{TEST_RESULTS}}
+~~~
 
 ## Agent-Specific Notes
 
