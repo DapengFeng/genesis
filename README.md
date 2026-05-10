@@ -1,43 +1,76 @@
-# Template Repository
+# Multi-Language Template Repository
 
-A comprehensive template repository for C++ projects with integrated development tools and best practices.
+This repository is a starter template for projects that want a consistent
+development workflow across multiple languages and toolchains.
 
-## Overview
+## What this template provides
 
-This template provides a ready-to-use foundation for C++ development projects with:
+- Repository-level quality checks managed with `pre-commit`
+- Formatting and linting defaults for common project assets
+- Structured GitHub issue and pull request templates
+- Coding-agent guidance for AI-assisted contribution workflows
+- Baseline ignore rules and repository metadata for new projects
 
-- **Code Quality**: Pre-configured clang-format and cpplint for consistent code styling
-- **Pre-commit Hooks**: Automated code quality checks before commits
-- **GitHub Integration**: Issue and pull request templates for better project management
-- **Multi-language Support**: Configuration for both C++ and Python development
-- **Modern C++ Standards**: Configured for C++20 with appropriate linting rules
+## Included tooling
 
-## Features
+The template is designed to support a mix of languages and project types.
+Current hooks and configuration cover:
 
-- 🔧 **Clang-format**: Comprehensive code formatting configuration
-- 📋 **Pre-commit hooks**: Automated checks for code quality, security, and formatting
-- 🐛 **CPP Lint**: C++ code linting with customized rules
-- 📁 **Gitignore**: Pre-configured for C++, Python, and common IDE files
-- 🎯 **GitHub Templates**: Bug report and feature request templates
-- 🔍 **Static Analysis**: Integrated cppcheck for code analysis
+- C and C++ formatting and linting
+- Python formatting and linting
+- Rust formatting and static checks
+- Dockerfile linting
+- CMake formatting
+- Makefile linting
+- YAML validation and general repository hygiene checks
+- Conventional commit message validation
 
-## Quick Start
+## Quick start
 
-1. Use this template to create a new repository
-2. Clone your new repository
-3. Install pre-commit hooks: `pre-commit install -t commit-msg`
-4. Start developing your C++ project
+1. Use this repository as a template for your new project.
+2. Clone the generated repository.
+3. Install `pre-commit`.
+4. Install repository hooks:
 
-## Coding Agent Support
+   ```bash
+   pre-commit install -t commit-msg
+   ```
 
-This repository includes structured issue and pull request templates that are
-designed to work well for both humans and coding agents.
+5. Run the full validation suite:
 
-- Follow `AGENTS.md` for repository-specific workflow and template usage
-  guidance.
-- Follow `.github/copilot-instructions.md` for GitHub Copilot-specific
-  instructions.
-- Run `pre-commit run --all-files` before opening a pull request and include
-  the command output in the PR template.
+   ```bash
+   pre-commit run --all-files
+   ```
 
-This template helps maintain code quality and consistency across your C++ projects while providing a solid foundation for collaborative development.
+6. Add your project code, language-specific tooling, and project documentation.
+
+## Repository workflow
+
+Use the existing repository automation before opening a pull request:
+
+- Run `pre-commit run --all-files`
+- Use conventional commit messages
+- Keep issue reports and pull requests aligned with the provided templates
+
+## Coding agent support
+
+This repository includes structured guidance for AI-assisted workflows:
+
+- `AGENTS.md` defines repository-wide expectations for coding agents
+- `.github/copilot-instructions.md` adds GitHub Copilot-specific guidance
+- `.github/ISSUE_TEMPLATE/` contains machine-readable issue forms
+- `.github/PULL_REQUEST_TEMPLATE.md` defines the expected PR structure
+
+## When to customize this template
+
+After creating a new repository from this template, update it to match your
+project:
+
+- Replace generic descriptions with project-specific documentation
+- Add or remove toolchains in `.pre-commit-config.yaml`
+- Extend `.gitignore` for your build outputs and editor settings
+- Add build, test, and release workflows that match your stack
+
+This template gives new repositories a clean starting point for contributor
+experience, review consistency, and automated validation across a mixed-language
+codebase.
