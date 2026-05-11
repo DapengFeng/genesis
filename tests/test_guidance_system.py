@@ -90,15 +90,27 @@ class GuidanceSystemTests(unittest.TestCase):
                 cpp_file,
                 inline_guidance="[guidance: No exceptions this time]",
             )
-            self.assertIn("inline-no-exceptions", json.dumps(resolution))
+            selected_rule = next(
+                entry["rule"]
+                for entry in resolution["rules"]
+                if entry["slot"] == "language.exceptions"
+            )
+            self.assertEqual(selected_rule["id"], "inline-no-exceptions")
+            self.assertFalse(selected_rule["allowed"])
 
             audit = audit_file(
                 root,
                 cpp_file,
                 inline_guidance="[guidance: No exceptions this time]",
             )
+            self.assertEqual(len(audit["findings"]), 1)
+            self.assertEqual(
+                audit["findings"][0]["rule_id"], "exceptions-disabled"
+            )
+            self.assertEqual(audit["findings"][0]["severity"], "error")
+            self.assertEqual(audit["findings"][0]["line"], 1)
             self.assertIn(
-                "exception handling disabled", json.dumps(audit["findings"])
+                "exception handling disabled", audit["findings"][0]["message"]
             )
 
     def test_rust_audit_reports_missing_debug(self) -> None:

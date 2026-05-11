@@ -23,8 +23,9 @@ RUST_PUBLIC_TYPE_PATTERN = re.compile(
 DERIVE_DEBUG_PATTERN = re.compile(
     r"#\s*\[derive\((?P<body>[^\]]*Debug[^\]]*)\)\]"
 )
-# Keep enough context to catch nearby #[derive(Debug)] attributes without
-# scanning the full file for every public type match.
+# Keep enough context to catch a nearby #[derive(...)] block under typical
+# Rust formatting (one attribute line plus a short blank line) without scanning
+# the full file for every public type match.
 DERIVE_LOOKBACK_CHARS = 120
 PROJECT_GUIDANCE_PRIORITY = 10
 NESTED_GUIDANCE_PRIORITY_OFFSET = 20
@@ -634,8 +635,7 @@ def parse_template_list(raw_templates: str) -> list[str]:
     ]
     if invalid:
         raise ValueError(
-            "Unsupported template(s): "
-            + ", ".join(sorted(set(str(item) for item in invalid)))
+            "Unsupported template(s): " + ", ".join(sorted(set(invalid)))
         )
     return [str(template) for template in templates]
 
