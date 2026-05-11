@@ -17,12 +17,13 @@ MARKDOWN_BLOCK_PATTERN = re.compile(
     r"```(?:yaml|yml|json)\n(.*?)```", re.DOTALL | re.IGNORECASE
 )
 RUST_PUBLIC_TYPE_PATTERN = re.compile(
-    r"^\s*pub\s+(?:struct|enum)\s+(?P<name>[A-Z][A-Za-z0-9_]*)",
+    r"^\s*pub\s+(?:struct|enum)\s+(?P<name>[A-Za-z_][A-Za-z0-9_]*)",
     re.MULTILINE,
 )
 DERIVE_DEBUG_PATTERN = re.compile(
     r"#\s*\[derive\((?P<body>[^\]]*Debug[^\]]*)\)\]"
 )
+DERIVE_LOOKBACK_CHARS = 120
 
 LANGUAGE_BY_SUFFIX = {
     ".cc": "cpp",
@@ -515,7 +516,7 @@ def rust_public_debug_checker(
     findings: list[dict[str, Any]] = []
     for match in RUST_PUBLIC_TYPE_PATTERN.finditer(content):
         anchor = match.start()
-        prefix = content[max(0, anchor - 120) : anchor]
+        prefix = content[max(0, anchor - DERIVE_LOOKBACK_CHARS) : anchor]
         if DERIVE_DEBUG_PATTERN.search(prefix):
             continue
         line, column = collect_line_column(content, match.start())

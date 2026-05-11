@@ -17,11 +17,11 @@ AI_CLI = REPO_ROOT / "ai"
 
 class GuidanceSystemTests(unittest.TestCase):
     def run_ai(
-        self, *args: str, cwd: Path
+        self, *args: str, working_directory: Path
     ) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [sys.executable, str(AI_CLI), *args],
-            cwd=cwd,
+            cwd=working_directory,
             check=False,
             text=True,
             capture_output=True,
@@ -34,7 +34,7 @@ class GuidanceSystemTests(unittest.TestCase):
                 "init",
                 "--template",
                 "python,cpp",
-                cwd=root,
+                working_directory=root,
             )
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertTrue((root / ".agent" / "guidance.yaml").exists())
@@ -48,7 +48,12 @@ class GuidanceSystemTests(unittest.TestCase):
     def test_resolve_uses_language_specific_identifier_style(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            self.run_ai("init", "--template", "python,cpp", cwd=root)
+            self.run_ai(
+                "init",
+                "--template",
+                "python,cpp",
+                working_directory=root,
+            )
             python_file = root / "python" / "module.py"
             cpp_file = root / "cpp" / "widget.cpp"
             python_file.parent.mkdir(parents=True)
@@ -67,7 +72,7 @@ class GuidanceSystemTests(unittest.TestCase):
     def test_inline_guidance_overrides_cpp_exceptions(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            self.run_ai("init", "--template", "cpp", cwd=root)
+            self.run_ai("init", "--template", "cpp", working_directory=root)
             cpp_file = root / "cpp" / "widget.cpp"
             cpp_file.parent.mkdir(parents=True)
             cpp_file.write_text(
@@ -93,7 +98,7 @@ class GuidanceSystemTests(unittest.TestCase):
     def test_rust_audit_reports_missing_debug(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            self.run_ai("init", "--template", "rust", cwd=root)
+            self.run_ai("init", "--template", "rust", working_directory=root)
             rust_file = root / "rust" / "lib.rs"
             rust_file.parent.mkdir(parents=True)
             rust_file.write_text("pub struct Widget;\n", encoding="utf-8")
@@ -107,13 +112,13 @@ class GuidanceSystemTests(unittest.TestCase):
     def test_audit_reports_raw_new_without_modifying_file(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            self.run_ai("init", "--template", "cpp", cwd=root)
+            self.run_ai("init", "--template", "cpp", working_directory=root)
             cpp_file = root / "cpp" / "widget.cpp"
             cpp_file.parent.mkdir(parents=True)
             original = "auto *value = new Widget();\n"
             cpp_file.write_text(original, encoding="utf-8")
 
-            result = self.run_ai("audit", "cpp", cwd=root)
+            result = self.run_ai("audit", "cpp", working_directory=root)
             self.assertEqual(result.returncode, 1)
             self.assertIn("use of raw new", result.stdout)
             self.assertEqual(cpp_file.read_text(encoding="utf-8"), original)
@@ -121,7 +126,12 @@ class GuidanceSystemTests(unittest.TestCase):
     def test_invalid_yaml_warns_and_valid_rules_continue_loading(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             root = Path(tmpdir)
-            self.run_ai("init", "--template", "python,cpp", cwd=root)
+            self.run_ai(
+                "init",
+                "--template",
+                "python,cpp",
+                working_directory=root,
+            )
             broken = root / ".agent" / "guidance" / "broken.yaml"
             broken.write_text("version: 1\nrules: [\n", encoding="utf-8")
             python_file = root / "python" / "module.py"
@@ -130,7 +140,11 @@ class GuidanceSystemTests(unittest.TestCase):
                 "def snake_case_name() -> None:\n    pass\n", encoding="utf-8"
             )
 
-            result = self.run_ai("resolve", "python/module.py", cwd=root)
+            result = self.run_ai(
+                "resolve",
+                "python/module.py",
+                working_directory=root,
+            )
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertIn("python-snake-case", result.stdout)
             self.assertIn(
