@@ -10,8 +10,8 @@ reviewers need.
 
 1. Start from the matching issue form and keep every section heading intact.
 2. Replace every `{{PLACEHOLDER}}` with repository-specific content before
-   submitting an issue or pull request. Automation rejects issues and pull
-   requests that still contain unresolved template tokens.
+   submitting an issue or pull request. Automation fails validation for
+   issues and pull requests that still contain unresolved template tokens.
 3. Prefer short bullet lists, numbered steps, and fenced code blocks over
    open-ended prose.
 4. Run `pre-commit run --all-files` before requesting review.
