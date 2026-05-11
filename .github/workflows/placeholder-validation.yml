@@ -27,9 +27,10 @@ jobs:
           with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as file:
               event = json.load(file)
 
+          html_comment_pattern = re.compile(r"<!--.*?-->", re.DOTALL)
           # Repository templates use token-style placeholders such as
           # {{TEST_RESULTS}} and {{AGENT_NOTES}}.
-          placeholder_pattern = re.compile(r"\{\{[A-Za-z0-9_]+\}\}")
+          placeholder_pattern = re.compile(r"(?<!\$)\{\{[A-Z][A-Z0-9_]*\}\}")
           fields_to_check = []
 
           issue = event.get("issue")
@@ -52,7 +53,8 @@ jobs:
 
           failures = []
           for label, value in fields_to_check:
-              matches = sorted(set(placeholder_pattern.findall(value or "")))
+              sanitized_value = html_comment_pattern.sub("", value or "")
+              matches = sorted(set(placeholder_pattern.findall(sanitized_value)))
               if matches:
                   failures.append(f"{label}: {', '.join(matches)}")
 
