@@ -23,7 +23,11 @@ RUST_PUBLIC_TYPE_PATTERN = re.compile(
 DERIVE_DEBUG_PATTERN = re.compile(
     r"#\s*\[derive\((?P<body>[^\]]*Debug[^\]]*)\)\]"
 )
+# Keep enough context to catch nearby #[derive(Debug)] attributes without
+# scanning the full file for every public type match.
 DERIVE_LOOKBACK_CHARS = 120
+PROJECT_GUIDANCE_PRIORITY = 10
+NESTED_GUIDANCE_PRIORITY_OFFSET = 20
 
 LANGUAGE_BY_SUFFIX = {
     ".cc": "cpp",
@@ -31,7 +35,7 @@ LANGUAGE_BY_SUFFIX = {
     ".cxx": "cpp",
     ".cuh": "cuda",
     ".cu": "cuda",
-    ".c": "cpp",
+    ".c": "c",
     ".h": "cpp",
     ".hpp": "cpp",
     ".hh": "cpp",
@@ -61,6 +65,7 @@ LANGUAGE_ALIASES = {
     "c++": "cpp",
     "cplusplus": "cpp",
     "cpp": "cpp",
+    "c": "c",
     "cuda": "cuda",
     "cu": "cuda",
     "py": "python",
@@ -291,14 +296,16 @@ def load_guidance(root: Path) -> tuple[list[GuidanceDocument], list[str]]:
 def compute_source_priority(root: Path, path: Path) -> int:
     agent_dir = root / ".agent"
     if path == agent_dir / "guidance.yaml":
-        return 10
+        return PROJECT_GUIDANCE_PRIORITY
     if path == agent_dir / "guidance.yml":
-        return 10
+        return PROJECT_GUIDANCE_PRIORITY
     if path == agent_dir / "guidance.json":
-        return 10
+        return PROJECT_GUIDANCE_PRIORITY
     if path == agent_dir / "guidance.md":
-        return 10
-    return 20 + len(path.relative_to(agent_dir / "guidance").parts)
+        return PROJECT_GUIDANCE_PRIORITY
+    return NESTED_GUIDANCE_PRIORITY_OFFSET + len(
+        path.relative_to(agent_dir / "guidance").parts
+    )
 
 
 def match_scope(

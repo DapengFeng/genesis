@@ -16,6 +16,12 @@ AI_CLI = REPO_ROOT / "ai"
 
 
 class GuidanceSystemTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+        if not AI_CLI.exists():
+            raise FileNotFoundError(f"Missing CLI entrypoint: {AI_CLI}")
+
     def run_ai(
         self, *args: str, working_directory: Path
     ) -> subprocess.CompletedProcess[str]:
