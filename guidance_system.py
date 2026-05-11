@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 import yaml
+from yaml import YAMLError
 
 GUIDANCE_INLINE_PATTERN = re.compile(r"\[guidance:\s*(.*?)\]", re.IGNORECASE)
 MARKDOWN_BLOCK_PATTERN = re.compile(
@@ -262,7 +263,7 @@ def load_guidance(root: Path) -> tuple[list[GuidanceDocument], list[str]]:
     for path in discover_guidance_files(root):
         try:
             data = parse_guidance_file(path)
-        except Exception as exc:  # pragma: no cover - exercised via tests
+        except (json.JSONDecodeError, ValueError, YAMLError) as exc:
             warnings.append(
                 f"Warning: skipped invalid guidance file {path}: {exc}"
             )
@@ -739,8 +740,7 @@ def main(argv: list[str] | None = None) -> int:
         return command_resolve(args)
     if args.command == "audit":
         return command_audit(args)
-    parser.error(f"Unsupported command: {args.command}")
-    return 2
+    raise AssertionError(f"Unhandled command: {args.command}")
 
 
 if __name__ == "__main__":  # pragma: no cover

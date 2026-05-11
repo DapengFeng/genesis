@@ -7,11 +7,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, "/home/runner/work/genesis/genesis")
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(REPO_ROOT))
 
 from guidance_system import audit_file, resolve_guidance  # noqa: E402
 
-REPO_ROOT = Path("/home/runner/work/genesis/genesis")
 AI_CLI = REPO_ROOT / "ai"
 
 
