@@ -1,0 +1,18 @@
+version: 1
+scope:
+  paths:
+  - cuda/**
+  - kernels/**
+  languages:
+  - cuda
+rules:
+- id: cuda-kernel-error-checking
+  slot: cuda.kernel_error_checking
+  description: Wrap kernel launches with error checking.
+  checker: advisory
+  severity: warning
+- id: cuda-thread-indexing
+  slot: cuda.thread_indexing
+  description: Use descriptive thread indexing helpers in kernels.
+  checker: advisory
+  severity: warning

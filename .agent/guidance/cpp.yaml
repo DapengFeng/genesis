@@ -1,0 +1,29 @@
+version: 1
+scope:
+  paths:
+  - cpp/**
+  - include/**
+  - src/**
+  languages:
+  - cpp
+rules:
+- id: cpp-camel-case
+  slot: naming.identifier_style
+  description: Prefer CamelCase identifiers in C++ code.
+  checker: advisory
+  style: CamelCase
+  severity: error
+- id: cpp-exceptions-allowed
+  slot: language.exceptions
+  description: Exceptions are allowed unless inline guidance disables them.
+  checker: feature_toggle
+  feature: exceptions
+  allowed: true
+  severity: warning
+- id: no-raw-new
+  slot: security.no_raw_new
+  description: Forbid raw new/delete; prefer RAII wrappers or containers.
+  checker: pattern
+  pattern: \bnew\b
+  message: use of raw new
+  severity: error

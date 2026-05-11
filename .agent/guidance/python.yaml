@@ -1,0 +1,18 @@
+version: 1
+scope:
+  paths:
+  - python/**
+  languages:
+  - python
+rules:
+- id: python-snake-case
+  slot: naming.identifier_style
+  description: Prefer snake_case identifiers in Python code.
+  checker: advisory
+  style: snake_case
+  severity: error
+- id: python-type-annotations
+  slot: python.public_api_typing
+  description: Require type annotations for public Python APIs.
+  checker: advisory
+  severity: warning
