@@ -8,7 +8,6 @@
 ## Related Issue
 
 - Related: {{ISSUE_REFERENCE}}
-- Use `Closes:` or `Fixes:` instead only when the PR should automatically close the referenced issue on merge.
 
 ## Testing Evidence
 
