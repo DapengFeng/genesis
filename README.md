@@ -9,8 +9,6 @@ development workflow across multiple languages and toolchains.
 - Formatting and linting defaults for common project assets
 - Structured GitHub issue and pull request templates
 - Coding-agent guidance for AI-assisted contribution workflows
-- A universal guidance scaffold for project, directory, and language-specific
-  agent rules
 - Baseline ignore rules and repository metadata for new projects
 
 ## Included tooling
@@ -62,56 +60,8 @@ This repository includes structured guidance for AI-assisted workflows:
 
 - `AGENTS.md` defines repository-wide expectations for coding agents
 - `.github/copilot-instructions.md` adds GitHub Copilot-specific guidance
-- `.agent/guidance.yaml` provides project-level defaults for the universal
-  guidance system
-- `.agent/guidance/*.yaml` provides layered language or directory overrides for
-  Python, C++, CUDA, Rust, or custom stacks
 - `.github/ISSUE_TEMPLATE/` contains machine-readable issue forms
 - `.github/PULL_REQUEST_TEMPLATE.md` defines the expected PR structure
-
-### Universal guidance quick start
-
-Use the lightweight `ai` helper to scaffold and inspect reusable guidance
-rules:
-
-```bash
-./ai init --template python,cpp
-./ai resolve python/example.py
-./ai audit cpp/
-```
-
-The scaffolded files use a layered model:
-
-- project defaults live in `.agent/guidance.yaml`
-- language or directory overrides live in `.agent/guidance/*.yaml`
-- inline instructions such as `[guidance: No exceptions this time]` override
-  file-based rules for a single run
-
-Example scaffold:
-
-```text
-.agent/
-├── guidance.yaml
-└── guidance/
-    ├── cpp.yaml
-    └── python.yaml
-```
-
-Each guidance file declares a versioned ruleset. Rules can be scoped by
-language, extension, or path glob, and the resolver reports conflicts instead
-of silently dropping lower-priority rules.
-
-### Audit mode and syntax warnings
-
-- `./ai audit <path>` prints guidance violations with file locations and never
-  rewrites files.
-- The built-in templates include examples for:
-  - Python snake_case naming and public API typing guidance
-  - C++ CamelCase naming, raw `new` detection, and exception toggles
-  - CUDA kernel and indexing reminders
-  - Rust `Debug` compliance for public types
-- Invalid YAML, JSON, or Markdown guidance files are skipped with a warning so
-  the remaining valid rules still apply.
 
 ## Example structured submissions
 

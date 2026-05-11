@@ -21,3 +21,11 @@ Use the repository templates as structured inputs and outputs.
 - Run `pre-commit run --all-files`.
 - Confirm that issue and PR sections are complete and machine-readable.
 - Keep the change summary and review checklist concise for human reviewers.
+
+## Guidance prompt
+
+- Read `AGENTS.md` before generating, refactoring, or reviewing code.
+- Make the smallest correct change and preserve the existing structure.
+- Surface conflicts, missing requirements, or ambiguity instead of guessing.
+- Keep outputs machine-readable with short bullets, numbered steps, and fenced code blocks.
+- Include the exact validation commands and results before requesting review.

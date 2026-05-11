@@ -14,12 +14,8 @@ reviewers need.
    issues and pull requests that still contain unresolved template tokens.
 3. Prefer short bullet lists, numbered steps, and fenced code blocks over
    open-ended prose.
-4. Load `.agent/guidance.yaml` plus any matching `.agent/guidance/*` overrides
-   before generating, refactoring, or reviewing code.
-5. Treat inline instructions such as `[guidance: ...]` as the highest-priority
-   overrides for the current task and report any conflicts you detect.
-6. Run `pre-commit run --all-files` before requesting review.
-7. Paste test commands and their results into the pull request template.
+4. Run `pre-commit run --all-files` before requesting review.
+5. Paste test commands and their results into the pull request template.
 
 ## Repository Checks
 
@@ -70,5 +66,3 @@ Always provide:
   `Agent-Specific Notes` sections.
 - Mirror the filled-in bug report and pull request examples in `README.md`
   when drafting new submissions.
-- Use audit-style reporting for guidance checks: include the rule identifier,
-  file location, and a short deviation note without changing the source file.
