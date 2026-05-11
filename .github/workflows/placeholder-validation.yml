@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_EVENT_PATH: ${{ github.event_path }}
         run: |
-          python - <<'PY'
+          python3 - <<'PY'
           import json
           import os
           import re
