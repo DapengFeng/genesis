@@ -1,5 +1,5 @@
 name: Feature request
-description: Propose a change with explicit scope, acceptance criteria, and agent notes
+description: Propose a capability with a clear problem, scope, and acceptance criteria
 title: "[Feature]: "
 labels:
   - enhancement
@@ -8,71 +8,59 @@ body:
 - type: markdown
   attributes:
     value: |
-      <!-- AGENT_ONLY: Prefer short, structured statements over free-form paragraphs. -->
-      <!-- AGENT_ONLY: Replace every {{PLACEHOLDER}} before submitting the request. -->
-      Describe the desired outcome clearly so both human reviewers and coding agents can act on it.
+      Search existing issues before submitting, and follow this project's contribution guidelines.
+      Describe the desired outcome and who benefits; implementation details can be discussed separately.
 - type: textarea
   id: context
   attributes:
     label: Context / Background
-    description: Explain the current workflow, the project context, and why this request matters now.
-    placeholder: |
-      {{CONTEXT}}
-  validations:
-    required: true
+    description: Describe who needs this capability and the workflow in which it would be used.
+    placeholder: Contributors currently copy validation results into pull requests by hand.
 - type: textarea
   id: problem_statement
   attributes:
     label: Problem Statement
-    description: Describe the concrete limitation, gap, or pain point that should be solved.
-    placeholder: |
-      {{PROBLEM_STATEMENT}}
+    description: Explain the concrete limitation, its impact, and why the current workflow is insufficient.
+    placeholder: Reviewers cannot easily tell which checks passed because submitted results use inconsistent formats.
   validations:
     required: true
 - type: textarea
   id: proposed_change
   attributes:
     label: Proposed Change
-    description: Describe the preferred solution, including important constraints or implementation boundaries.
-    placeholder: |
-      {{PROPOSED_CHANGE}}
+    description: Describe the desired behavior, with an example of how someone would use it.
+    placeholder: Add a validation table to the pull request template, with columns for command and result.
   validations:
     required: true
+- type: textarea
+  id: scope
+  attributes:
+    label: Scope / Constraints
+    description: Identify what is included, what is out of scope, and any compatibility or project constraints.
+    placeholder: |
+      - Include a short example in the contribution guide.
+      - Do not require any particular test framework.
+      - Automated collection of results is out of scope.
 - type: textarea
   id: acceptance_criteria
   attributes:
     label: Acceptance Criteria
-    description: List the observable conditions that must be true for this request to be complete.
+    description: List observable, testable conditions that would make this request complete.
     placeholder: |
-      - [ ] {{ACCEPTANCE_CRITERION_1}}
-      - [ ] {{ACCEPTANCE_CRITERION_2}}
+      - [ ] New pull requests display a validation table.
+      - [ ] Each row can record a command and its result.
+      - [ ] The guide shows how to record a skipped check and its reason.
   validations:
     required: true
 - type: textarea
   id: alternatives
   attributes:
     label: Alternatives Considered
-    description: Note any alternative solutions, workarounds, or reasons for rejecting other options.
-    placeholder: |
-      {{ALTERNATIVES}}
+    description: Describe existing workarounds or other solutions, and explain their tradeoffs.
+    placeholder: Free-form test notes require less structure, but reviewers must locate results manually.
 - type: textarea
   id: additional_context
   attributes:
-    label: Additional context
-    description: Add supporting examples, links, screenshots, or logs if they clarify the request.
-    placeholder: |
-      {{ADDITIONAL_CONTEXT}}
-- type: textarea
-  id: agent_notes
-  attributes:
-    label: Agent-Specific Notes
-    description: Record instructions that a coding agent should follow while implementing this request.
-    placeholder: |
-      {{AGENT_NOTES}}
-      Example:
-      - Keep markdown sections stable for machine parsing
-      - Include test evidence or explain why tests were not added
-- type: markdown
-  attributes:
-    value: |
-      Thanks for contributing.
+    label: Additional Context
+    description: Add relevant examples, links, mockups, dependencies, or related issues.
+    placeholder: Link to an existing pull request that illustrates the missing information.

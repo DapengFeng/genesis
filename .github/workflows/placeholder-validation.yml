@@ -28,8 +28,8 @@ jobs:
               event = json.load(file)
 
           html_comment_pattern = re.compile(r"<!--.*?-->", re.DOTALL)
-          # Repository templates use token-style placeholders such as
-          # {{TEST_RESULTS}} and {{AGENT_NOTES}}.
+          # Submission templates use token-style placeholders such as
+          # {{TEST_RESULTS}} and {{CHANGELOG_ENTRIES}}.
           placeholder_pattern = re.compile(r"(?<!\$)\{\{[A-Z][A-Z0-9_]*\}\}")
           fields_to_check = []
 

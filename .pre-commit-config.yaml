@@ -28,7 +28,8 @@ repos:
   - id: cppcheck
     args: [--inline-suppr]
   - id: cpplint
-- repo: https://github.com/BlankSpruce/gersemi
+# Gersemi publishes its hook manifest in this dedicated integration repository.
+- repo: https://github.com/BlankSpruce/gersemi-pre-commit
   rev: 0.26.1
   hooks:
   - id: gersemi
